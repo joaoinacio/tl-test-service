@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+
+  microservice:
+    build: .
+    hostname: 'microservice.test'
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+    environment:
+      APP_ENV: dev
+    ports:
+      - '82:8000'
+    command: bash -c 'composer install && php bin/console server:run'
