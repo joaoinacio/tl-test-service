@@ -11,6 +11,8 @@
         "symfony/yaml": "*"
     },
     "require-dev": {
+        "phpstan/phpstan": "^0.10.5",
+        "squizlabs/php_codesniffer": "*",
         "symfony/dotenv": "*",
         "symfony/phpunit-bridge": "*",
         "symfony/web-server-bundle": "*"

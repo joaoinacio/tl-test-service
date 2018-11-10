@@ -12,4 +12,4 @@ services:
       APP_ENV: dev
     ports:
       - '82:8000'
-    command: bash -c 'composer install && php bin/console server:run'
+    command: bash -c 'composer install && php bin/console server:run *:8000'
