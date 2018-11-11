@@ -1,9 +1,10 @@
 <?php
 namespace App\Tests\Entity\Repository;
 
-use App\Entity\Repository\ProductRepository;
 use App\Entity\Product;
+use App\Entity\Repository\ProductRepository;
 use App\Service\Gateway\JsonDataFile;
+use Prophecy\Prophet;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
@@ -12,15 +13,27 @@ class ProductRepositoryTest extends KernelTestCase
     protected function setUp()
     {
         self::bootKernel();
+        $this->prophet = new Prophet();
     }
 
     private function createRepository(): ProductRepository
     {
-        // TODO: mock the json file loader gateway and provide own data.
-        $fileLoaderGateway = self::$container->get('app.data_gateway');
-        $objectNormalizer = new ObjectNormalizer();
+        $fileLoaderGateway = $this->prophet->prophesize(JsonDataFile::class);
+        $fileLoaderGateway->fetchSingle('products', ['id' => 'A102'])
+            ->willReturn([
+                "id" => "A102",
+                "description" => "Electric screwdriver",
+                "category" => "1",
+                "price" => "49.50"
+            ]);
 
-        return new ProductRepository($fileLoaderGateway, $objectNormalizer);
+        $fileLoaderGateway->fetchSingle('products',\Prophecy\Argument::any())
+            ->willReturn([]);
+
+        return new ProductRepository(
+            $fileLoaderGateway->reveal(),
+            new ObjectNormalizer()
+        );
     }
 
     public function testGetCustomerByIdValid()
