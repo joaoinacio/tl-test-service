@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    json_data_dir: '%kernel.project_dir%/data'
 
 services:
     # default configuration for services in *this* file
@@ -25,6 +26,18 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+    # define alias
+    app.data_gateway:
+        alias: App\Service\Gateway\JsonDataFile
+        public: true
+
+    App\Entity\Repository\:
+        resource: '../src/Entity/Repository'
+        arguments: ['@app.data_gateway']
+
+    App\Service\Gateway\JsonDataFile:
+        arguments: ['%json_data_dir%']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
