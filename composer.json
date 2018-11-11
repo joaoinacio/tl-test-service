@@ -13,6 +13,7 @@
         "symfony/yaml": "*"
     },
     "require-dev": {
+        "phpspec/prophecy": "^1.8",
         "phpstan/phpstan": "^0.10.5",
         "squizlabs/php_codesniffer": "*",
         "symfony/dotenv": "*",

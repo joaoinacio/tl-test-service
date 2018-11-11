@@ -24,7 +24,14 @@ class JsonDataFile implements DataGatewayInterface
         $fileLocator = new FileLocator($this->dataPath);
         $entityFile = $fileLocator->locate("${entity}.json", null, true);
 
+        if (!is_string($entityFile)) {
+            return;
+        }
+
         $jsonData = file_get_contents($entityFile);
+        if (!$jsonData) {
+            throw new \Exception(sprintf('Error while reading from "%s"', $entityFile));
+        }
         $this->data[$entity] = json_decode($jsonData, true);
     }
 

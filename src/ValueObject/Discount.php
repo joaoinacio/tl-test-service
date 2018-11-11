@@ -13,4 +13,9 @@ class Discount
         $this->value = $value;
         $this->reasonText = $reasonText;
     }
+
+    public function getValue(): float
+    {
+        return (float)$this->value;
+    }
 }
