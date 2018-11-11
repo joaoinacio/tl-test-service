@@ -7,8 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Service\Discount\DiscountCalculatorInterface;
-use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Symfony\Component\Serializer\Serializer;
 use App\ValueObject\Order;
 
 class DiscountsController extends AbstractController
@@ -19,11 +18,11 @@ class DiscountsController extends AbstractController
     private $discountCalculator;
 
     /**
-     * @var SerializerInterface
+     * @var Serializer
      */
     private $serializer;
 
-    public function __construct(DiscountCalculatorInterface $discountCalculator, SerializerInterface $serializer)
+    public function __construct(DiscountCalculatorInterface $discountCalculator, Serializer $serializer)
     {
         $this->discountCalculator = $discountCalculator;
         $this->serializer = $serializer;

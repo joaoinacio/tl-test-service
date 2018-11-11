@@ -41,7 +41,7 @@ services:
     App\Controller\DiscountsController:
         arguments:
             $discountCalculator: '@app.discount_calculator'
-            # $normalizer: '@App\Normalizer\OrderDenormalizer'
+            $serializer: '@serializer'
 
     # tag calculator rules
     App\Service\Discount\Rule\:
