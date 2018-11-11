@@ -7,7 +7,11 @@ use App\Service\Discount\DiscountCalculatorInterface;
 use App\ValueObject\Order;
 use App\ValueObject\Discount;
 
-class BuyFiveFromCagetory2GetSixthFree implements DiscountCalculatorInterface
+/**
+ * Discount calculator rule:
+ * For every product of category "Switches" (id 2), when you buy five, you get a sixth for free
+ */
+class BuyFiveFromCategory2GetSixthFree implements DiscountCalculatorInterface
 {
     const DISCOUNT_REASON_TEXT = 'For every product of category "Switches" (id 2), when you buy five, you get a sixth for free';
     const DISCOUNT_ITEM_CATEGORY = 2;

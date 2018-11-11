@@ -5,7 +5,12 @@ namespace App\Service\Discount;
 use App\ValueObject\Order;
 use App\ValueObject\Discount;
 
-class DiscountCalculator implements DiscountCalculatorInterface
+/**
+ * Composite discount calculator
+ *
+ * Given a list of inner calculators (rules), calculates and returns the highest discount.
+ */
+class HighestDiscountCalculator implements DiscountCalculatorInterface
 {
     const NO_DISCOUNT_REASON_TEXT = 'No discount.';
 

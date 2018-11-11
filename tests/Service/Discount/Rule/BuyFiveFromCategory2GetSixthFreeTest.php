@@ -3,14 +3,14 @@ namespace App\Tests\Entity\Repository;
 
 use App\Entity\Product;
 use App\Entity\Repository\ProductRepository;
-use App\Service\Discount\Rule\BuyFiveFromCagetory2GetSixthFree;
+use App\Service\Discount\Rule\BuyFiveFromCategory2GetSixthFree;
 use App\ValueObject\Order;
 use App\ValueObject\OrderItem;
 use App\ValueObject\Discount;
 use Prophecy\Prophet;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class BuyFiveFromCagetory2GetSixthFreeTest extends KernelTestCase
+class BuyFiveFromCategory2GetSixthFreeTest extends KernelTestCase
 {
 
     protected function setUp()
@@ -27,7 +27,7 @@ class BuyFiveFromCagetory2GetSixthFreeTest extends KernelTestCase
         $productRepository->getById('B101')->willReturn(new Product('B101', 'Basic on-off switch', '2', '4.99'));
         $productRepository->getById('B102')->willReturn(new Product('B102', 'Press button', '2', '4.99'));
 
-        return new BuyFiveFromCagetory2GetSixthFree($productRepository->reveal());
+        return new BuyFiveFromCategory2GetSixthFree($productRepository->reveal());
     }
 
     public function testCanApplyDiscountItemsNok()

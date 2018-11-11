@@ -35,7 +35,7 @@ services:
         public: true
 
     app.discount_calculator:
-        alias: App\Service\Discount\DiscountCalculator
+        alias: App\Service\Discount\HighestDiscountCalculator
         public: true
 
     App\Controller\DiscountsController:
@@ -48,7 +48,7 @@ services:
         resource: '../src/Service/Discount/Rule'
         tags: ['app.discount_calculator_rule']
 
-    App\Service\Discount\DiscountCalculator:
+    App\Service\Discount\HighestDiscountCalculator:
         arguments: [!tagged app.discount_calculator_rule]
 
     App\Entity\Repository\:
