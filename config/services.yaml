@@ -27,11 +27,9 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    App\Controller\DiscountsController:
-        arguments:
-            $discountCalculator: '@app.discount_calculator'
+    # please note that last definitions always *replace* previous ones
 
-    # define alias
+    # define aliases for used services
     app.data_gateway:
         alias: App\Service\Gateway\JsonDataFile
         public: true
@@ -40,12 +38,18 @@ services:
         alias: App\Service\Discount\DiscountCalculator
         public: true
 
+    App\Controller\DiscountsController:
+        arguments:
+            $discountCalculator: '@app.discount_calculator'
+            # $normalizer: '@App\Normalizer\OrderDenormalizer'
+
+    # tag calculator rules
     App\Service\Discount\Rule\:
         resource: '../src/Service/Discount/Rule'
-        tags: ['app.discount_rule']
+        tags: ['app.discount_calculator_rule']
 
     App\Service\Discount\DiscountCalculator:
-        arguments: [!tagged app.discount_rule]
+        arguments: [!tagged app.discount_calculator_rule]
 
     App\Entity\Repository\:
         resource: '../src/Entity/Repository'
@@ -53,6 +57,3 @@ services:
 
     App\Service\Gateway\JsonDataFile:
         arguments: ['%json_data_dir%']
-
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones

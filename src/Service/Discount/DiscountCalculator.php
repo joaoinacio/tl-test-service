@@ -41,13 +41,18 @@ class DiscountCalculator implements DiscountCalculatorInterface
      */
     public function calculateDiscount(Order $order): Discount
     {
-        $discounts = [];
+        $discountToApply = new Discount(0, self::NO_DISCOUNT_REASON_TEXT);
+
         foreach ($this->calculators as $calculator) {
             if ($calculator->canApplyDiscount($order)) {
-                return $calculator->calculateDiscount($order);
+                $newDiscount = $calculator->calculateDiscount($order);
+
+                if ($newDiscount->getValue() > $discountToApply->getValue()) {
+                    $discountToApply = $newDiscount;
+                }
             }
         }
 
-        return new Discount(0, self::NO_DISCOUNT_REASON_TEXT);
+        return $discountToApply;
     }
 }

@@ -16,4 +16,9 @@ class Product
     {
         $this->id = $id;
     }
+
+    public function getCategory()
+    {
+        return $this->category;
+    }
 }

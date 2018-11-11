@@ -19,4 +19,9 @@ class Order
         $this->items = $items;
         $this->total = (float)$total;
     }
+
+    public function getItems(): array
+    {
+        return $this->items;
+    }
 }
