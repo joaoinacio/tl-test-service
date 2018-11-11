@@ -34,7 +34,7 @@ class CustomerRepositoryTest extends KernelTestCase
 
     public function testGetCustomerByIdDoesntExist()
     {
-        $repository = $this->createCustomerRepository();
+        $repository = $this->createRepository();
         $customer = $repository->getById(123);
 
         $this->assertNull($customer);

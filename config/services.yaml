@@ -27,10 +27,25 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    App\Controller\DiscountsController:
+        arguments:
+            $discountCalculator: '@app.discount_calculator'
+
     # define alias
     app.data_gateway:
         alias: App\Service\Gateway\JsonDataFile
         public: true
+
+    app.discount_calculator:
+        alias: App\Service\Discount\DiscountCalculator
+        public: true
+
+    App\Service\Discount\Rule\:
+        resource: '../src/Service/Discount/Rule'
+        tags: ['app.discount_rule']
+
+    App\Service\Discount\DiscountCalculator:
+        arguments: [!tagged app.discount_rule]
 
     App\Entity\Repository\:
         resource: '../src/Entity/Repository'

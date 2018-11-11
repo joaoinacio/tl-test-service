@@ -16,7 +16,7 @@ class Customer
     {
         $this->id = $id;
         $this->name = $name;
-        $this->since = $ince;
+        $this->since = $since;
         $this->revenue = $revenue;
     }
 
