@@ -8,6 +8,10 @@ use App\Service\Discount\DiscountCalculatorInterface;
 use App\ValueObject\Order;
 use App\ValueObject\Discount;
 
+/**
+ * Discount calculator rule:
+ * "A customer who has already bought for over € 1000, gets a discount of 10% on the whole order."
+ */
 class TenPercentOnCustomerRevenue1000 implements DiscountCalculatorInterface
 {
     const DISCOUNT_VALUE_PERCENT = 0.1;
