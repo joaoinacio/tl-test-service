@@ -12,13 +12,21 @@ class Product
 
     public $price;
 
-    public function __construct($id)
+    public function __construct($id, $description, $category, $price)
     {
         $this->id = $id;
+        $this->description = $description;
+        $this->category = $category;
+        $this->price = (float)$price;
     }
 
     public function getCategory()
     {
         return $this->category;
+    }
+
+    public function getPrice(): float
+    {
+        return $this->price;
     }
 }

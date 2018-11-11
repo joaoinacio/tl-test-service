@@ -48,7 +48,15 @@ class TenPercentOnCustomerRevenue1000Test extends KernelTestCase
 
     public function testDiscountForOrderCustomerNOk()
     {
-        // TODO: expect (custom) exception?
+        $calculator = $this->createInstance();
+        $order = new Order(1, 1, [], 123);
+
+        try {
+            $result = $calculator->calculateDiscount($order);
+            $this->fail('Expected exception not thrown');
+        } catch (\Exception $e) {
+            $this->assertInstanceOf(\Exception::class, $e);
+        }
     }
 
     public function testDiscountForOrderCustomerOk()
